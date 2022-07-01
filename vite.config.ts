@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite';
 import path from 'path';
-import solidPlugin from 'vite-plugin-solid';
+import preact from '@preact/preset-vite';
 
 export default defineConfig({
-  plugins: [solidPlugin()],
+  plugins: [preact()],
   resolve: {
     alias: {
       '@src': path.resolve(__dirname, './src'),
