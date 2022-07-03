@@ -1,16 +1,27 @@
 {
   "compilerOptions": {
-    "strict": true,
     "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "node",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
     "jsx": "preserve",
-    "jsxImportSource": "solid-js",
-    "types": ["vite/client", "node"],
+    // "jsxFactory": "h",
+    // "jsxFragmentFactory": "Fragment",
+    "baseUrl": ".",
     "paths": {
-      "@src/*": ["./src/*"]
+      "@src": ["src"],
+      "@src/*": ["src/*"]
     }
-  }
+  },
+  "include": ["src"]
 }
