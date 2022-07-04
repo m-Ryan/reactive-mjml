@@ -21,6 +21,8 @@ import { MjmlNavbar } from './MjmlNavbar';
 import { MjmlNavbarLink } from './MjmlNavbarLink';
 import { MjmlSocial } from './MjmlSocial';
 import { MjmlSocialElement } from './MjmlSocialElement';
+import { MjmlHead } from './MjmlHead';
+import { MjmlHeadAttribute } from './MjmlHeadAttributes';
 
 export const blocks: Record<string, any> = {
   'mj-body': MjmlBody,
@@ -46,4 +48,6 @@ export const blocks: Record<string, any> = {
   'mj-navbar-link': MjmlNavbarLink,
   'mj-social': MjmlSocial,
   'mj-social-element': MjmlSocialElement,
+  'mj-head': MjmlHead,
+  'mj-attributes': MjmlHeadAttribute,
 };

@@ -1,162 +1,21 @@
 import mjml from 'mjml-browser';
 const mjmlText = `<mjml>
+<mj-head>
+  <mj-attributes>
+    <mj-text padding="0" />
+    <mj-class name="blue" color="blue" />
+    <mj-class name="big" font-size="20px" />
+    <mj-all font-family="Arial" />
+  </mj-attributes>
+</mj-head>
 <mj-body>
-<mj-wrapper border="1px solid #000000" padding="50px 30px">
-<mj-section border-top="1px solid #aaaaaa" border-left="1px solid #aaaaaa" border-right="1px solid #aaaaaa" padding="20px">
-  <mj-column>
-    <mj-image padding="0" src="https://placeholdit.imgix.net/~text?&w=350&h=150" />
-  </mj-column>
-</mj-section>
-<mj-section border-left="1px solid #aaaaaa" border-right="1px solid #aaaaaa" padding="20px" border-bottom="1px solid #aaaaaa">
-  <mj-column border="1px solid #dddddd">
-    <mj-text padding="20px"> First line of text </mj-text>
-    <mj-divider border-width="1px" border-style="dashed" border-color="lightgrey" padding="0 20px" />
-    <mj-text padding="20px"> Second line of text </mj-text>
-  </mj-column>
-</mj-section>
-</mj-wrapper>
-
-<mj-section>
-      <mj-column>
-        <mj-table>
-          <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
-            <th style="padding: 0 15px 0 0;">Year</th>
-            <th style="padding: 0 15px;">Language</th>
-            <th style="padding: 0 0 0 15px;">Inspired from</th>
-          </tr>
-          <tr>
-            <td style="padding: 0 15px 0 0;">1995</td>
-            <td style="padding: 0 15px;">PHP</td>
-            <td style="padding: 0 0 0 15px;">C, Shell Unix</td>
-          </tr>
-          <tr>
-            <td style="padding: 0 15px 0 0;">1995</td>
-            <td style="padding: 0 15px;">JavaScript</td>
-            <td style="padding: 0 0 0 15px;">Scheme, Self</td>
-          </tr>
-        </mj-table>
-      </mj-column>
-    </mj-section>
-<mj-raw>
-<!-- htmlmin:ignore -->{% if foo < 5 %}<!-- htmlmin:ignore -->
-</mj-raw>
-<!-- Some mjml section -->
-<mj-raw>
-{% endif %}
-</mj-raw>
-<mj-section>
-      <mj-column>
-        <mj-text>A first line of text</mj-text>
-        <mj-spacer height="50px" />
-        <mj-text>A second line of text</mj-text>
-      </mj-column>
-    </mj-section>
-<mj-section>
-      <mj-column>
-        <mj-social font-size="15px" icon-size="30px" mode="horizontal">
-          <mj-social-element name="facebook" href="https://mjml.io/">
-            Facebook
-          </mj-social-element>
-          <mj-social-element name="google" href="https://mjml.io/">
-            Google
-          </mj-social-element>
-          <mj-social-element  name="twitter" href="https://mjml.io/">
-            Twitter
-          </mj-social-element>
-        </mj-social>
-      </mj-column>
-    </mj-section>
-<mj-section background-color="#ef6451">
-      <mj-column>
-        <mj-navbar base-url="https://mjml.io" hamburger="hamburger" ico-color="#ffffff">
-            <mj-navbar-link href="/gettings-started-onboard" color="#ffffff">Getting started</mj-navbar-link>
-            <mj-navbar-link href="/try-it-live" color="#ffffff">Try it live</mj-navbar-link>
-            <mj-navbar-link href="/templates" color="#ffffff">Templates</mj-navbar-link>
-            <mj-navbar-link href="/components" color="#ffffff">Components</mj-navbar-link>
-        </mj-navbar>
-      </mj-column>
-    </mj-section>
-<mj-section padding="0px" ><mj-column ><mj-carousel align="center" left-icon="https://easy-email-m-ryan.vercel.app/images/82f6f893-43ed-4f3d-9a17-4740bda844de-3318b36c-199d-46fe-96b8-38d1f17ef0c1.png" right-icon="https://easy-email-m-ryan.vercel.app/images/f1ece227-e050-4751-b064-aaeeabd5bfde-d459e9a2-b192-417b-8a77-2297b29e814e.png" icon-width="44px" thumbnails="visible" >
-      <mj-carousel-image src="https://easy-email-m-ryan.vercel.app/images/f69f48af-5b15-40aa-91c4-81d601d1357b-083dc99d-02a6-40d9-ae28-0662bd078b5d.png" target="_blank" />
-
-
-      <mj-carousel-image src="https://easy-email-m-ryan.vercel.app/images/9cce6b16-5a98-4ddb-b1a1-6cec2cf56891-c3acb856-8ab8-4cfb-93f9-2a0747678b8b.png" target="_blank" />
-
-
-      <mj-carousel-image src="https://easy-email-m-ryan.vercel.app/images/d9795c1d-fa32-4adb-ab25-30b7cfe87936-df21314f-6f05-4550-80b3-9ab1107e8fbe.png" target="_blank" />
-      </mj-carousel></mj-column></mj-section>
-<mj-section padding="20px" background-color="#ffffff">
-<mj-column background-color="#dededd">
-  <mj-accordion>
-    <mj-accordion-element>
-      <mj-accordion-title>Why use an accordion?</mj-accordion-title>
-      <mj-accordion-text>
-        <span style="line-height:20px">
-          Because emails with a lot of content are most of the time a very bad experience on mobile, mj-accordion comes handy when you want to deliver a lot of information in a concise way.
-        </span>
-      </mj-accordion-text>
-    </mj-accordion-element>
-    <mj-accordion-element>
-      <mj-accordion-title>How it works</mj-accordion-title>
-      <mj-accordion-text>
-        <span style="line-height:20px">
-          Content is stacked into tabs and users can expand them at will. If responsive styles are not supported (mostly on desktop clients), tabs are then expanded and your content is readable at once.
-        </span>
-      </mj-accordion-text>
-    </mj-accordion-element>
-  </mj-accordion>
-</mj-column>
-</mj-section>
-  <mj-section background-color="green">
+  <mj-section>
     <mj-column>
-      <mj-image width="100px" src="https://mjml.io/assets/img/logo-small.png"></mj-image>
-      <mj-divider padding="0px" border-color="#F45E43"></mj-divider>
-      <mj-text font-size="40px" color="#F45E43" font-family="helvetica">Hello World</mj-text>
-      <mj-button font-size="20px" align="center">Hello World</mj-button>
-
+      <mj-text mj-class="blue big">
+        Hello World!
+      </mj-text>
     </mj-column>
   </mj-section>
-  <mj-section background-color="blue">
-    <mj-column>
-      <mj-image width="100px" src="https://mjml.io/assets/img/logo-small.png"></mj-image>
-    </mj-column>
-    <mj-column>
-    <mj-image width="100px" src="https://mjml.io/assets/img/logo-small.png"></mj-image>
-  </mj-column>
-  </mj-section>
-  <mj-section background-color="yellow">
-   <mj-group>
-      <mj-column>
-      <mj-image width="100px" src="https://mjml.io/assets/img/logo-small.png"></mj-image>
-    </mj-column>
-    <mj-column>
-      <mj-image width="100px" src="https://mjml.io/assets/img/logo-small.png"></mj-image>
-    </mj-column>
-   </mj-group>
-  </mj-section>
-  <mj-hero
-    mode="fixed-height"
-    height="469px"
-    background-width="600px"
-    background-height="469px"
-    background-url=
-        "https://cloud.githubusercontent.com/assets/1830348/15354890/1442159a-1cf0-11e6-92b1-b861dadf1750.jpg"
-    background-color="#2a3448"
-    padding="100px 0px">
-    <mj-text
-      padding="20px"
-      color="#ffffff"
-      font-family="Helvetica"
-      align="center"
-      font-size="45px"
-      line-height="45px"
-      font-weight="900">
-      GO TO SPACE
-    </mj-text>
-    <mj-button href="https://mjml.io/" align="center">
-      ORDER YOUR TICKET NOW
-    </mj-button>
-  </mj-hero>
 </mj-body>
 </mjml>`;
 
