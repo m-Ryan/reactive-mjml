@@ -6,7 +6,7 @@ import { IBlock, IComponentAttributes } from '@src/typings';
 import { formatAttributes } from '@src/utils/helpers/formatAttributes';
 import { MjmlContext } from '@src/context/MjmlContext';
 
-export abstract class BodyComponent<T extends Record<string, string>> extends Component<{ data: IBlock<T>; nonRawSiblings: number; containerWidth: string; }, {}, typeof MjmlContext> {
+export abstract class BodyComponent<T extends Record<string, any>> extends Component<T & { data: IBlock; nonRawSiblings: number; containerWidth: string; }, {}, typeof MjmlContext> {
   declare context: React.ContextType<typeof MjmlContext>;
   static defaultAttributes: Record<string, any> = {};
   static allowedAttributes: Record<string, string> = {};
@@ -100,7 +100,7 @@ export abstract class BodyComponent<T extends Record<string, string>> extends Co
     if (raw) {
       return reduce(
         omitBy(attributes, isNil),
-        (output, v, name) => {
+        (output, v: any, name) => {
           const fn = name === 'style' ? specialAttributes.style : specialAttributes.default;
           const value = fn(
             v,
@@ -113,7 +113,7 @@ export abstract class BodyComponent<T extends Record<string, string>> extends Co
     } else {
       const obj = reduce(
         omitBy(attributes, isNil),
-        (output, v, name) => {
+        (output, v: any, name) => {
           const fn = name === 'style' ? specialAttributes.style : specialAttributes.default;
           const value = fn(
             v,

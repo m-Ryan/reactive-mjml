@@ -11,6 +11,8 @@ import { MjmlAccordion } from './MjmlAccordion';
 import { MjmlAccordionElement } from './MjmlAccordionElement';
 import { MjmlAccordionTitle } from './MjmlAccordionTitle';
 import { MjmlAccordionText } from './MjmlAccordionText';
+import { MjmlCarousel } from './MjmlCarousel';
+import { MjmlCarouselImage } from './MjmlCarouselImage';
 
 export const blocks: Record<string, any> = {
   'mj-body': MjmlBody,
@@ -26,4 +28,6 @@ export const blocks: Record<string, any> = {
   'mj-accordion-element': MjmlAccordionElement,
   'mj-accordion-title': MjmlAccordionTitle,
   'mj-accordion-text': MjmlAccordionText,
+  'mj-carousel': MjmlCarousel,
+  'mj-carousel-image': MjmlCarouselImage,
 };

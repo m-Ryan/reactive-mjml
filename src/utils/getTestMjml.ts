@@ -1,6 +1,15 @@
 import mjml from 'mjml-browser';
 const mjmlText = `<mjml>
 <mj-body>
+<mj-section padding="0px" ><mj-column ><mj-carousel align="center" left-icon="https://easy-email-m-ryan.vercel.app/images/82f6f893-43ed-4f3d-9a17-4740bda844de-3318b36c-199d-46fe-96b8-38d1f17ef0c1.png" right-icon="https://easy-email-m-ryan.vercel.app/images/f1ece227-e050-4751-b064-aaeeabd5bfde-d459e9a2-b192-417b-8a77-2297b29e814e.png" icon-width="44px" thumbnails="visible" >
+      <mj-carousel-image src="https://easy-email-m-ryan.vercel.app/images/f69f48af-5b15-40aa-91c4-81d601d1357b-083dc99d-02a6-40d9-ae28-0662bd078b5d.png" target="_blank" />
+
+
+      <mj-carousel-image src="https://easy-email-m-ryan.vercel.app/images/9cce6b16-5a98-4ddb-b1a1-6cec2cf56891-c3acb856-8ab8-4cfb-93f9-2a0747678b8b.png" target="_blank" />
+
+
+      <mj-carousel-image src="https://easy-email-m-ryan.vercel.app/images/d9795c1d-fa32-4adb-ab25-30b7cfe87936-df21314f-6f05-4550-80b3-9ab1107e8fbe.png" target="_blank" />
+      </mj-carousel></mj-column></mj-section>
 <mj-section padding="20px" background-color="#ffffff">
 <mj-column background-color="#dededd">
   <mj-accordion>

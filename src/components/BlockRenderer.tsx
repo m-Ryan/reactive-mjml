@@ -2,9 +2,9 @@ import { IBlock } from '@src/typings';
 import { BlockManager } from '@src/utils/BlockManager';
 import { isEqual } from 'lodash';
 import { observer } from 'mobx-react';
-import { FunctionComponent, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 
-export const BlockRenderer: FunctionComponent<{ data: IBlock; containerWidth: string; parent: IBlock | null; attributes?: Record<string, string>; }> = (props) => {
+export const BlockRenderer = <T extends { data: IBlock; containerWidth: string; parent: IBlock | null; attributes?: Record<string, string>; }>(props: T) => {
   const ref = useRef<any>();
   const Com = observer(BlockManager.getBlock(props.data.tagName) as any);
 
