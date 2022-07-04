@@ -1,6 +1,31 @@
 import mjml from 'mjml-browser';
 const mjmlText = `<mjml>
 <mj-body>
+<mj-section>
+      <mj-column>
+        <mj-social font-size="15px" icon-size="30px" mode="horizontal">
+          <mj-social-element name="facebook" href="https://mjml.io/">
+            Facebook
+          </mj-social-element>
+          <mj-social-element name="google" href="https://mjml.io/">
+            Google
+          </mj-social-element>
+          <mj-social-element  name="twitter" href="https://mjml.io/">
+            Twitter
+          </mj-social-element>
+        </mj-social>
+      </mj-column>
+    </mj-section>
+<mj-section background-color="#ef6451">
+      <mj-column>
+        <mj-navbar base-url="https://mjml.io" hamburger="hamburger" ico-color="#ffffff">
+            <mj-navbar-link href="/gettings-started-onboard" color="#ffffff">Getting started</mj-navbar-link>
+            <mj-navbar-link href="/try-it-live" color="#ffffff">Try it live</mj-navbar-link>
+            <mj-navbar-link href="/templates" color="#ffffff">Templates</mj-navbar-link>
+            <mj-navbar-link href="/components" color="#ffffff">Components</mj-navbar-link>
+        </mj-navbar>
+      </mj-column>
+    </mj-section>
 <mj-section padding="0px" ><mj-column ><mj-carousel align="center" left-icon="https://easy-email-m-ryan.vercel.app/images/82f6f893-43ed-4f3d-9a17-4740bda844de-3318b36c-199d-46fe-96b8-38d1f17ef0c1.png" right-icon="https://easy-email-m-ryan.vercel.app/images/f1ece227-e050-4751-b064-aaeeabd5bfde-d459e9a2-b192-417b-8a77-2297b29e814e.png" icon-width="44px" thumbnails="visible" >
       <mj-carousel-image src="https://easy-email-m-ryan.vercel.app/images/f69f48af-5b15-40aa-91c4-81d601d1357b-083dc99d-02a6-40d9-ae28-0662bd078b5d.png" target="_blank" />
 

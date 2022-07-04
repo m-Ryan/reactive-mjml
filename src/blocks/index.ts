@@ -13,6 +13,10 @@ import { MjmlAccordionTitle } from './MjmlAccordionTitle';
 import { MjmlAccordionText } from './MjmlAccordionText';
 import { MjmlCarousel } from './MjmlCarousel';
 import { MjmlCarouselImage } from './MjmlCarouselImage';
+import { MjmlNavbar } from './MjmlNavbar';
+import { MjmlNavbarLink } from './MjmlNavbarLink';
+import { MjmlSocial } from './MjmlSocial';
+import { MjmlSocialElement } from './MjmlSocialElement';
 
 export const blocks: Record<string, any> = {
   'mj-body': MjmlBody,
@@ -30,4 +34,8 @@ export const blocks: Record<string, any> = {
   'mj-accordion-text': MjmlAccordionText,
   'mj-carousel': MjmlCarousel,
   'mj-carousel-image': MjmlCarouselImage,
+  'mj-navbar': MjmlNavbar,
+  'mj-navbar-link': MjmlNavbarLink,
+  'mj-social': MjmlSocial,
+  'mj-social-element': MjmlSocialElement,
 };

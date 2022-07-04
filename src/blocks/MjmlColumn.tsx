@@ -1,12 +1,7 @@
 
 import { BlockRenderer } from '@src/components/BlockRenderer';
 import { BodyComponent } from '@src/components/BodyComponent';
-import { BlockManager } from '@src/utils/BlockManager';
 import { widthParser } from '@src/utils/widthParser';
-import { filter, flow, identity } from 'lodash';
-
-const makeBackgroundString = flow(filter, identity, (str: string[]) => str.join(' '));
-
 export class MjmlColumn extends BodyComponent<{}> {
 
   static componentName = 'mj-column';

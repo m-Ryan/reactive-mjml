@@ -7,4 +7,8 @@ export interface IBlock<T extends Record<string, string> = Record<string, string
 
 export type IComponentAttributes =
   | Record<string, string>
-  | { [key: string]: string; style: Record<string, string> };
+  | {
+      [key: string]: string;
+      class?: string;
+      style?: Record<string, string>;
+    };

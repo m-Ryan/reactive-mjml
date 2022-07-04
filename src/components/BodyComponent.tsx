@@ -32,6 +32,10 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
     return !!this.rawElement;
   }
 
+  getBreakpoint() {
+    return this.context.data.breakpoint;
+  }
+
   getAttribute(name: string): string {
     return (this.attributes as any)[name];
   }
@@ -91,7 +95,7 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
     };
   }
 
-  htmlAttributes(attributes: IComponentAttributes, raw = true) {
+  htmlAttributes(attributes: IComponentAttributes | string, raw = true) {
     const specialAttributes = {
       style: (v: string) => this.styles(v, raw),
       default: identity,

@@ -43,4 +43,7 @@ export class GlobalContext {
   setBackgroundColor = (color: string) => {
     this.data.backgroundColor = color;
   };
+  setBreakPoint = (breakpoint: string) => {
+    this.data.breakpoint = breakpoint;
+  };
 }
