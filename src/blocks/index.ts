@@ -23,6 +23,7 @@ import { MjmlSocial } from './MjmlSocial';
 import { MjmlSocialElement } from './MjmlSocialElement';
 import { MjmlHead } from './MjmlHead';
 import { MjmlHeadAttribute } from './MjmlHeadAttributes';
+import { MjmlBreakPoint } from './MjmlBreakPoint';
 
 export const blocks: Record<string, any> = {
   'mj-body': MjmlBody,
@@ -50,4 +51,5 @@ export const blocks: Record<string, any> = {
   'mj-social-element': MjmlSocialElement,
   'mj-head': MjmlHead,
   'mj-attributes': MjmlHeadAttribute,
+  'mj-breakpoint': MjmlBreakPoint,
 };
