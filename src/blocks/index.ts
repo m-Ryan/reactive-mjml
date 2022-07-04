@@ -1,4 +1,5 @@
 import { MjmlBody } from './MjmlBody';
+import { MjmlRaw } from './MjmlRaw';
 import { MjmlSection } from './MjmlSection';
 import { MjmlColumn } from './MjmlColumn';
 import { MjmlText } from './MjmlText';
@@ -6,6 +7,7 @@ import { MjmlButton } from './MjmlButton';
 import { MjmlImage } from './MjmlImage';
 import { MjmlGroup } from './MjmlGroup';
 import { MjmlDivider } from './MjmlDivider';
+import { MjmlSpacer } from './MjmlSpacer';
 import { MjmlHero } from './MjmlmHero';
 import { MjmlAccordion } from './MjmlAccordion';
 import { MjmlAccordionElement } from './MjmlAccordionElement';
@@ -20,6 +22,7 @@ import { MjmlSocialElement } from './MjmlSocialElement';
 
 export const blocks: Record<string, any> = {
   'mj-body': MjmlBody,
+  'mj-raw': MjmlRaw,
   'mj-hero': MjmlHero,
   'mj-section': MjmlSection,
   'mj-column': MjmlColumn,
@@ -28,6 +31,7 @@ export const blocks: Record<string, any> = {
   'mj-button': MjmlButton,
   'mj-image': MjmlImage,
   'mj-divider': MjmlDivider,
+  'mj-spacer': MjmlSpacer,
   'mj-accordion': MjmlAccordion,
   'mj-accordion-element': MjmlAccordionElement,
   'mj-accordion-title': MjmlAccordionTitle,

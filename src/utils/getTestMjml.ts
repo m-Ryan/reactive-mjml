@@ -1,6 +1,20 @@
 import mjml from 'mjml-browser';
 const mjmlText = `<mjml>
 <mj-body>
+<mj-raw>
+<!-- htmlmin:ignore -->{% if foo < 5 %}<!-- htmlmin:ignore -->
+</mj-raw>
+<!-- Some mjml section -->
+<mj-raw>
+{% endif %}
+</mj-raw>
+<mj-section>
+      <mj-column>
+        <mj-text>A first line of text</mj-text>
+        <mj-spacer height="50px" />
+        <mj-text>A second line of text</mj-text>
+      </mj-column>
+    </mj-section>
 <mj-section>
       <mj-column>
         <mj-social font-size="15px" icon-size="30px" mode="horizontal">
