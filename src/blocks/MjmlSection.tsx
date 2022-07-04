@@ -181,10 +181,16 @@ export class MjmlSection extends BodyComponent<{}> {
     return this.getAttribute('full-width') === 'full-width';
   }
 
-  renderSection() {
+  renderWrappedChildren() {
     const { box } = this.getBoxWidths();
 
     const containerWidth = `${box}px`;
+    return this.props.data.children?.map((item, index) => <BlockRenderer key={index} parent={this.props.data} data={item} containerWidth={containerWidth} />);
+  }
+
+
+  renderSection() {
+
     const hasBackground = this.hasBackground();
     const content = (
       <table
@@ -213,7 +219,7 @@ export class MjmlSection extends BodyComponent<{}> {
                 false,
               )}
             >
-              {this.props.data.children?.map((item, index) => <BlockRenderer key={index} parent={this.props.data} data={item} containerWidth={containerWidth} />)}
+              {this.renderWrappedChildren()}
             </td>
           </tr>
         </tbody>

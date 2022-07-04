@@ -1,5 +1,6 @@
 import { MjmlBody } from './MjmlBody';
 import { MjmlRaw } from './MjmlRaw';
+import { MjmlWrapper } from './MjmlWrapper';
 import { MjmlSection } from './MjmlSection';
 import { MjmlColumn } from './MjmlColumn';
 import { MjmlText } from './MjmlText';
@@ -25,6 +26,7 @@ export const blocks: Record<string, any> = {
   'mj-body': MjmlBody,
   'mj-raw': MjmlRaw,
   'mj-hero': MjmlHero,
+  'mj-wrapper': MjmlWrapper,
   'mj-section': MjmlSection,
   'mj-column': MjmlColumn,
   'mj-group': MjmlGroup,
