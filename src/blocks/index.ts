@@ -5,6 +5,7 @@ import { MjmlColumn } from './MjmlColumn';
 import { MjmlText } from './MjmlText';
 import { MjmlButton } from './MjmlButton';
 import { MjmlImage } from './MjmlImage';
+import { MjmlTable } from './MjmlTable';
 import { MjmlGroup } from './MjmlGroup';
 import { MjmlDivider } from './MjmlDivider';
 import { MjmlSpacer } from './MjmlSpacer';
@@ -30,6 +31,7 @@ export const blocks: Record<string, any> = {
   'mj-text': MjmlText,
   'mj-button': MjmlButton,
   'mj-image': MjmlImage,
+  'mj-table': MjmlTable,
   'mj-divider': MjmlDivider,
   'mj-spacer': MjmlSpacer,
   'mj-accordion': MjmlAccordion,
