@@ -1,7 +1,7 @@
 
 
 import { BodyComponent } from '@src/components/BodyComponent';
-import { omit, reduce } from 'lodash';
+import { omit } from 'lodash';
 
 export class MjmlHeadAttribute extends BodyComponent<{}> {
   static componentName = 'mj-attributes';
@@ -11,22 +11,13 @@ export class MjmlHeadAttribute extends BodyComponent<{}> {
     children.forEach(item => {
       const { attributes, tagName } = item;
       if (tagName === 'mj-class') {
-        this.context.add('classes', attributes.name, omit(attributes, ['name']));
-
-        this.context.add(
-          'classesDefault',
-          attributes.name,
-          reduce(
-            children,
-            (acc, { tagName, attributes }) => ({
-              ...acc,
-              [tagName]: attributes,
-            }),
-            {} as Record<string, any>,
-          ),
-        );
+        this.context.addClassAttributes(attributes.name, omit(attributes, ['name']));
+      } else if (tagName === 'mj-all') {
+        Object.keys(attributes).forEach(key => {
+          this.context.addGlobalAttribute(key, attributes[key]);
+        });
       } else {
-        this.context.add('defaultAttributes', tagName, attributes);
+        this.context.addBlockDefaultAttribute(tagName, attributes);
       }
     });
   };

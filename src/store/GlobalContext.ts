@@ -1,4 +1,4 @@
-import { isObject } from 'lodash';
+import { isObject, set } from 'lodash';
 import { makeAutoObservable } from 'mobx';
 
 type StanderObject = Record<string, string>;
@@ -7,21 +7,13 @@ export class GlobalContext {
   data = {
     backgroundColor: '',
 
-    beforeDoctype: '',
+    globalAttributes: {} as StanderObject,
+    blockAttributes: {} as Record<string, StanderObject>,
+    classAttributes: {} as Record<string, StanderObject>,
     breakpoint: '480px',
-    classes: {},
-    classesDefault: {},
-    defaultAttributes: {} as StanderObject,
-    htmlAttributes: {} as StanderObject,
     fonts: [],
     inlineStyle: [],
     headStyle: {} as StanderObject,
-    componentsHeadStyle: [] as string[],
-    headRaw: [],
-    mediaQueries: {} as StanderObject,
-    preview: '',
-    style: [],
-    title: '',
   };
   constructor() {
     makeAutoObservable(this);
@@ -53,19 +45,26 @@ export class GlobalContext {
     }
   };
 
-  addMediaQuery = (
-    className: string,
-    { parsedWidth, unit }: { parsedWidth: string | number; unit: string },
-  ) => {
-    this.data.mediaQueries[
-      className
-    ] = `{ width:${parsedWidth}${unit} !important; max-width: ${parsedWidth}${unit}; }`;
-  };
   addHeadStyle = (identifier: string, headStyle: string) => {
     this.data.headStyle[identifier] = headStyle;
   };
   addComponentHeadStyle = (headStyle: string) => {
     this.data.componentsHeadStyle.push(headStyle);
+  };
+  addGlobalAttribute = (name: string, val: any) => {
+    this.data.globalAttributes[name] = val;
+  };
+  addBlockDefaultAttribute = (name: string, val: StanderObject) => {
+    if (!this.data.blockAttributes[name]) {
+      this.data.blockAttributes[name] = {};
+    }
+    Object.assign(this.data.blockAttributes[name], val);
+  };
+  addClassAttributes = (name: string, val: StanderObject) => {
+    if (!this.data.classAttributes[name]) {
+      this.data.classAttributes[name] = {};
+    }
+    Object.assign(this.data.classAttributes[name], val);
   };
   setBackgroundColor = (color: string) => {
     this.data.backgroundColor = color;

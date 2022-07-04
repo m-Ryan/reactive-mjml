@@ -5,6 +5,7 @@ import he from 'he';
 import { IBlock, IComponentAttributes } from '@src/typings';
 import { formatAttributes } from '@src/utils/helpers/formatAttributes';
 import { MjmlContext } from '@src/context/MjmlContext';
+import { toJS } from 'mobx';
 
 export abstract class BodyComponent<T extends Record<string, any>> extends Component<T & { data: IBlock; nonRawSiblings: number; containerWidth: string; }, {}, typeof MjmlContext> {
   declare context: React.ContextType<typeof MjmlContext>;
@@ -14,11 +15,42 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
   static contextType = MjmlContext;
 
   get attributes(): IComponentAttributes {
+    const { data: contextData } = this.context;
+
+    const attributesClasses = {} as Record<string, any>;
+
+    // mj-all
+    const globalAttributes = contextData.globalAttributes;
+
+    // mj-[text]
+    const blockAttributes = contextData.blockAttributes[this.props.data.tagName];
+    if (blockAttributes) {
+      Object.assign(attributesClasses, blockAttributes);
+    }
+
+    // mj-class
+    Object.keys(contextData.classAttributes).forEach(value => {
+      const acc = {
+        ...(this.constructor as any).defaultAttributes,
+        ...this.props.data.attributes,
+      } as Record<string, any>;
+
+      const mjClassValues: string[] = acc['mj-class'] ? acc['mj-class'].split(" ").filter(Boolean) : [];
+      if (this.props.data.tagName === 'mj-text') {
+        // console.log(acc, mjClassValues);
+      }
+
+      if (mjClassValues.includes(value)) {
+        Object.assign(attributesClasses, get(contextData.classAttributes, value));
+      }
+    });
+
+
     return formatAttributes(
       {
         ...(this.constructor as any).defaultAttributes,
-        // ...globalAttributes,
-        // FIXME
+        ...globalAttributes,
+        ...attributesClasses,
         ...this.props.data.attributes,
       },
       (this.constructor as any).allowedAttributes,

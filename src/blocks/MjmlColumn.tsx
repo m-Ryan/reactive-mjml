@@ -1,6 +1,7 @@
 
 import { BlockRenderer } from '@src/components/BlockRenderer';
 import { BodyComponent } from '@src/components/BodyComponent';
+import { getMediaQuery } from '@src/utils/helpers/getMediaQuery';
 import { widthParser } from '@src/utils/widthParser';
 export class MjmlColumn extends BodyComponent<{}> {
 
@@ -173,8 +174,7 @@ export class MjmlColumn extends BodyComponent<{}> {
     };
   }
 
-  getColumnClass() {
-    const { addMediaQuery } = this.context;
+  getColumnClassAndMediaQuery() {
 
     let className = '';
 
@@ -196,12 +196,13 @@ export class MjmlColumn extends BodyComponent<{}> {
     }
 
 
-    addMediaQuery(className, {
-      parsedWidth,
-      unit,
-    });
-
-    return className;
+    return {
+      className,
+      mediaQuery: getMediaQuery(className, {
+        parsedWidth,
+        unit,
+      }, this.context.data.breakpoint)
+    };
   }
 
   hasGutter() {
@@ -265,7 +266,8 @@ export class MjmlColumn extends BodyComponent<{}> {
   }
 
   render() {
-    let classesName = `${this.getColumnClass()} mj-outlook-group-fix`;
+    const { className: columnClassName, mediaQuery } = this.getColumnClassAndMediaQuery();
+    let classesName = `${columnClassName} mj-outlook-group-fix`;
 
     if (this.getAttribute('css-class')) {
       classesName += ` ${this.getAttribute('css-class')}`;
@@ -282,6 +284,7 @@ export class MjmlColumn extends BodyComponent<{}> {
         )}
       >
         {this.hasGutter() ? this.renderGutter() : this.renderColumn()}
+        {mediaQuery}
       </div>
     );
   }
