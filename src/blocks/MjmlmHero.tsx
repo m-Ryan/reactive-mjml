@@ -1,4 +1,3 @@
-
 import { BlockRenderer } from '@src/components/BlockRenderer';
 import { BodyComponent } from '@src/components/BodyComponent';
 import { widthParser } from '@src/utils/widthParser';
@@ -61,8 +60,9 @@ export class MjmlHero extends BodyComponent<{}> {
     });
 
     if (unit === '%') {
-      currentContainerWidth = `${(parseFloat(containerWidth) * parsedWidth) / 100 - paddingSize
-        }px`;
+      currentContainerWidth = `${
+        (parseFloat(containerWidth) * parsedWidth) / 100 - paddingSize
+      }px`;
     } else {
       currentContainerWidth = `${parsedWidth - paddingSize}px`;
     }
@@ -75,7 +75,7 @@ export class MjmlHero extends BodyComponent<{}> {
     const backgroundRatio = Math.round(
       (parseInt(this.getAttribute('background-height'), 10) /
         parseInt(this.getAttribute('background-width'), 10)) *
-      100,
+        100,
     );
 
     const width = this.getAttribute('background-width') || containerWidth;
@@ -154,46 +154,61 @@ export class MjmlHero extends BodyComponent<{}> {
       this.getAttribute('background-color'),
       ...(this.getAttribute('background-url')
         ? [
-          `url('${this.getAttribute('background-url')}')`,
-          'no-repeat',
-          `${this.getAttribute('background-position')} / cover`,
-        ]
+            `url('${this.getAttribute('background-url')}')`,
+            'no-repeat',
+            `${this.getAttribute('background-position')} / cover`,
+          ]
         : []),
     ]);
 
   renderContent() {
-
     return (
       <div
-        {...this.htmlAttributes({
-          align: this.getAttribute('align'),
-          class: 'mj-hero-content',
-          style: 'inner-div',
-        }, false)}
+        {...this.htmlAttributes(
+          {
+            align: this.getAttribute('align'),
+            class: 'mj-hero-content',
+            style: 'inner-div',
+          },
+          false,
+        )}
       >
         <table
-          {...this.htmlAttributes({
-            border: '0',
-            cellpadding: '0',
-            cellspacing: '0',
-            role: 'presentation',
-            style: 'inner-table',
-          }, false)}
+          {...this.htmlAttributes(
+            {
+              border: '0',
+              cellpadding: '0',
+              cellspacing: '0',
+              role: 'presentation',
+              style: 'inner-table',
+            },
+            false,
+          )}
         >
           <tbody>
             <tr>
-              <td {...this.htmlAttributes({ style: 'inner-td' }, false)} >
+              <td {...this.htmlAttributes({ style: 'inner-td' }, false)}>
                 <table
-                  {...this.htmlAttributes({
-                    border: '0',
-                    cellpadding: '0',
-                    cellspacing: '0',
-                    role: 'presentation',
-                    style: 'inner-table',
-                  }, false)}
+                  {...this.htmlAttributes(
+                    {
+                      border: '0',
+                      cellpadding: '0',
+                      cellspacing: '0',
+                      role: 'presentation',
+                      style: 'inner-table',
+                    },
+                    false,
+                  )}
                 >
                   <tbody>
-                    {this.props.data.children?.map((item, index) => <BlockRenderer key={index} data={item} parent={this.props.data} containerWidth={this.getParentContainerWidth()} />)}
+                    {this.props.data.children?.map((item, index) => (
+                      <BlockRenderer
+                        key={index}
+                        data={item}
+                        parent={this.props.data}
+                        containerWidth={this.getParentContainerWidth()}
+                      />
+                    ))}
                   </tbody>
                 </table>
               </td>
@@ -213,15 +228,17 @@ export class MjmlHero extends BodyComponent<{}> {
     /* eslint-disable no-alert, no-case-declarations */
     switch (this.getAttribute('mode')) {
       case 'fluid-height':
-        const magicTd = this.htmlAttributes({ style: `td-fluid` });
+        const magicTd = this.htmlAttributes({ style: `td-fluid` }, false);
 
-        return <>
-          <td {...magicTd} />
-          <td {...this.htmlAttributes({ ...commonAttributes }, false)}>
-            {this.renderContent()}
-          </td>
-          <td {...magicTd} />
-        </>;
+        return (
+          <>
+            <td {...magicTd} />
+            <td {...this.htmlAttributes({ ...commonAttributes }, false)}>
+              {this.renderContent()}
+            </td>
+            <td {...magicTd} />
+          </>
+        );
       case 'fixed-height':
       default:
         const height =
@@ -229,44 +246,58 @@ export class MjmlHero extends BodyComponent<{}> {
           this.getShorthandAttrValue('padding', 'top') -
           this.getShorthandAttrValue('padding', 'bottom');
 
-        return <td
-          {...this.htmlAttributes({
-            ...commonAttributes,
-            height: height.toString(),
-          }, false)}
-        >
-          {this.renderContent()}
-        </td>;
+        return (
+          <td
+            {...this.htmlAttributes(
+              {
+                ...commonAttributes,
+                height: height.toString(),
+              },
+              false,
+            )}
+          >
+            {this.renderContent()}
+          </td>
+        );
     }
     /* eslint-enable no-alert, no-case-declarations */
   }
 
   render() {
-
     return (
       <div
-        {...this.htmlAttributes({
-          align: this.getAttribute('align'),
-          class: this.getAttribute('css-class'),
-          style: 'div',
-        }, false)}
+        {...this.htmlAttributes(
+          {
+            align: this.getAttribute('align'),
+            class: this.getAttribute('css-class'),
+            style: 'div',
+          },
+          false,
+        )}
       >
         <table
-          {...this.htmlAttributes({
-            border: '0',
-            cellpadding: '0',
-            cellspacing: '0',
-            role: 'presentation',
-            style: 'table',
-          }, false)}
+          {...this.htmlAttributes(
+            {
+              border: '0',
+              cellpadding: '0',
+              cellspacing: '0',
+              role: 'presentation',
+              style: 'table',
+            },
+            false,
+          )}
         >
           <tbody>
             <tr
-              {...this.htmlAttributes({
-                style: 'tr',
-              }, false)}
-
-            >{this.renderMode()}</tr>
+              {...this.htmlAttributes(
+                {
+                  style: 'tr',
+                },
+                false,
+              )}
+            >
+              {this.renderMode()}
+            </tr>
           </tbody>
         </table>
       </div>

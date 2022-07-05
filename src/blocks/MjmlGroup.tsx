@@ -1,10 +1,9 @@
-
 import { BlockRenderer } from '@src/components/BlockRenderer';
 import { BodyComponent } from '@src/components/BodyComponent';
+import { getMediaQuery } from '@src/utils/helpers/getMediaQuery';
 import { widthParser } from '@src/utils/widthParser';
 
 export class MjmlGroup extends BodyComponent<{}> {
-
   static componentName = 'mj-group';
 
   static allowedAttributes = {
@@ -26,16 +25,14 @@ export class MjmlGroup extends BodyComponent<{}> {
       this.getShorthandAttrValue('padding', 'right');
 
     let containerWidth =
-      this.getAttribute('width') ||
-      `${parseFloat(parentWidth) / nonRawSiblings}px`;
+      this.getAttribute('width') || `${parseFloat(parentWidth) / nonRawSiblings}px`;
 
     const { unit, parsedWidth } = widthParser(containerWidth, {
       parseFloatToInt: false,
     });
 
     if (unit === '%') {
-      containerWidth = `${(parseFloat(parentWidth) * parsedWidth) / 100 - paddingSize
-        }px`;
+      containerWidth = `${(parseFloat(parentWidth) * parsedWidth) / 100 - paddingSize}px`;
     } else {
       containerWidth = `${parsedWidth - paddingSize}px`;
     }
@@ -94,39 +91,42 @@ export class MjmlGroup extends BodyComponent<{}> {
     return `${parsedWidth}px`;
   }
 
-  getColumnClass() {
-    const { addMediaQuery } = this.context;
-
+  getColumnClassAndMediaQuery() {
     let className = '';
 
     const { parsedWidth, unit } = this.getParsedWidth() as {
-      unit: "default" | "px" | "%";
+      unit: string;
       parsedWidth: number;
     };
+    const formattedClassNb = parsedWidth.toString().replace('.', '-');
 
     switch (unit) {
       case '%':
-        className = `mj-column-per-${parseInt(parsedWidth.toString(), 10)}`;
+        className = `mj-column-per-${formattedClassNb}`;
         break;
 
       case 'px':
       default:
-        className = `mj-column-px-${parseInt(parsedWidth.toString(), 10)}`;
+        className = `mj-column-px-${formattedClassNb}`;
         break;
     }
 
-    // Add className to media queries
-    addMediaQuery(className, {
-      parsedWidth,
-      unit,
-    });
-
-    return className;
+    return {
+      className,
+      mediaQuery: getMediaQuery(
+        className,
+        {
+          parsedWidth,
+          unit,
+        },
+        this.context.data.breakpoint,
+      ),
+    };
   }
 
   render() {
-
-    let classesName = `${this.getColumnClass()} mj-outlook-group-fix`;
+    const { className: columnClassName, mediaQuery } = this.getColumnClassAndMediaQuery();
+    let classesName = `${columnClassName} mj-outlook-group-fix`;
 
     if (this.getAttribute('css-class')) {
       classesName += ` ${this.getAttribute('css-class')}`;
@@ -142,7 +142,16 @@ export class MjmlGroup extends BodyComponent<{}> {
           false,
         )}
       >
-        {this.props.data.children?.map((item, index) => <BlockRenderer key={index} data={item} containerWidth={this.getParentWidth()} parent={this.props.data} attributes={{ mobileWidth: 'mobileWidth' }} />)}
+        {this.props.data.children?.map((item, index) => (
+          <BlockRenderer
+            key={index}
+            data={item}
+            containerWidth={this.getParentWidth()}
+            parent={this.props.data}
+            attributes={{ mobileWidth: 'mobileWidth' }}
+          />
+        ))}
+        {mediaQuery}
       </div>
     );
   }

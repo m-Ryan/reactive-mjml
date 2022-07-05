@@ -1,5 +1,3 @@
-
-
 import { BodyComponent } from '@src/components/BodyComponent';
 import { each, get } from 'lodash';
 
@@ -51,8 +49,7 @@ const defaultSocialNetworks: Record<string, any> = {
   },
   tumblr: {
     src: `${IMG_BASE_URL}tumblr.png`,
-    'share-url':
-      'https://www.tumblr.com/widgets/share/tool?canonicalUrl=[[URL]]',
+    'share-url': 'https://www.tumblr.com/widgets/share/tool?canonicalUrl=[[URL]]',
     'background-color': '#344356',
   },
   github: {
@@ -82,8 +79,6 @@ const defaultSocialNetworks: Record<string, any> = {
   },
 };
 
-
-
 each(defaultSocialNetworks, (val, key) => {
   defaultSocialNetworks[`${key}-noshare`] = {
     ...val,
@@ -91,7 +86,10 @@ each(defaultSocialNetworks, (val, key) => {
   };
 });
 
-export class MjmlSocialElement extends BodyComponent<{ mode: 'horizontal' | 'vertical'; align: string; }> {
+export class MjmlSocialElement extends BodyComponent<{
+  mode: 'horizontal' | 'vertical';
+  align: string;
+}> {
   static componentName = 'mj-social-element';
 
   static endingTag = true;
@@ -227,43 +225,45 @@ export class MjmlSocialElement extends BodyComponent<{ mode: 'horizontal' | 'ver
 
     const hasLink = !!this.getAttribute('href');
 
-    const content = <tr
-      {...this.htmlAttributes({
-        class: this.getAttribute('css-class'),
-      })}
-      dangerouslySetInnerHTML={{
-        __html: `  <td ${this.htmlAttributes({ style: 'td' })}>
+    const content = (
+      <tr
+        {...this.htmlAttributes({
+          class: this.getAttribute('css-class'),
+        })}
+        dangerouslySetInnerHTML={{
+          __html: `  <td ${this.htmlAttributes({ style: 'td' })}>
     <table
       ${this.htmlAttributes({
-          border: '0',
-          cellpadding: '0',
-          cellspacing: '0',
-          role: 'presentation',
-          style: 'table',
-        })}
+        border: '0',
+        cellpadding: '0',
+        cellspacing: '0',
+        role: 'presentation',
+        style: 'table',
+      })}
     >
       <tbody>
         <tr>
           <td ${this.htmlAttributes({ style: 'icon' })}>
-            ${hasLink
-            ? `<a ${this.htmlAttributes({
-              href,
-              rel: this.getAttribute('rel'),
-              target: this.getAttribute('target'),
-            })}>`
-            : ''
-          }
+            ${
+              hasLink
+                ? `<a ${this.htmlAttributes({
+                    href,
+                    rel: this.getAttribute('rel'),
+                    target: this.getAttribute('target'),
+                  })}>`
+                : ''
+            }
               <img
                 ${this.htmlAttributes({
-            alt: this.getAttribute('alt'),
-            title: this.getAttribute('title'),
-            height: parseInt(iconHeight || iconSize, 10).toString(),
-            src,
-            style: 'img',
-            width: parseInt(iconSize, 10).toString(),
-            sizes,
-            srcset,
-          })}
+                  alt: this.getAttribute('alt'),
+                  title: this.getAttribute('title'),
+                  height: parseInt(iconHeight || iconSize, 10).toString(),
+                  src,
+                  style: 'img',
+                  width: parseInt(iconSize, 10).toString(),
+                  sizes,
+                  srcset,
+                })}
               />
             ${hasLink ? `</a>` : ''}
           </td>
@@ -271,31 +271,33 @@ export class MjmlSocialElement extends BodyComponent<{ mode: 'horizontal' | 'ver
       </tbody>
     </table>
   </td>
-  ${this.getContent()
-            ? `
+  ${
+    this.getContent()
+      ? `
     <td ${this.htmlAttributes({ style: 'tdText' })}>
-      ${hasLink
-              ? `<a
+      ${
+        hasLink
+          ? `<a
           ${this.htmlAttributes({
-                href,
-                style: 'text',
-                rel: this.getAttribute('rel'),
-                target: this.getAttribute('target'),
-              })}>`
-              : `<span
+            href,
+            style: 'text',
+            rel: this.getAttribute('rel'),
+            target: this.getAttribute('target'),
+          })}>`
+          : `<span
               ${this.htmlAttributes({
                 style: 'text',
               })}>`
-            }
+      }
         ${this.getContent()}
       ${hasLink ? `</a>` : '</span>'}
     </td>
     `
-            : ''
-          }`,
-      }}
-    ></tr>;
-
+      : ''
+  }`,
+        }}
+      ></tr>
+    );
     return this.props.mode === 'horizontal' ? (
       <table
         {...this.htmlAttributes(
@@ -315,6 +317,8 @@ export class MjmlSocialElement extends BodyComponent<{ mode: 'horizontal' | 'ver
       >
         <tbody>{content}</tbody>
       </table>
-    ) : content;
+    ) : (
+      content
+    );
   }
 }

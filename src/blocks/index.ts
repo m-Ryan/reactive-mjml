@@ -1,4 +1,5 @@
 import { MjmlBody } from './MjmlBody';
+import { MjmlPreview } from './MjmlPreview';
 import { MjmlRaw } from './MjmlRaw';
 import { MjmlWrapper } from './MjmlWrapper';
 import { MjmlSection } from './MjmlSection';
@@ -24,9 +25,18 @@ import { MjmlSocialElement } from './MjmlSocialElement';
 import { MjmlHead } from './MjmlHead';
 import { MjmlHeadAttribute } from './MjmlHeadAttributes';
 import { MjmlBreakPoint } from './MjmlBreakPoint';
+import { MjmlTitle } from './MjmlTitle';
+import { MjmlFont } from './MjmlFont';
+import { MjmlHtmlAttribute } from './MjmlHtmlAttribute';
+import { MjmlStyle } from './MjmlStyle';
 
 export const blocks: Record<string, any> = {
+  'mj-title': MjmlTitle,
+  'mj-font': MjmlFont,
+  'mj-html-attributes': MjmlHtmlAttribute,
+  'mj-style': MjmlStyle,
   'mj-body': MjmlBody,
+  'mj-preview': MjmlPreview,
   'mj-raw': MjmlRaw,
   'mj-hero': MjmlHero,
   'mj-wrapper': MjmlWrapper,

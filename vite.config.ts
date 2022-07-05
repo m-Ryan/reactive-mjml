@@ -2,11 +2,14 @@ import { defineConfig } from 'vite';
 import path from 'path';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 
+import { visualizer } from 'rollup-plugin-visualizer';
+
 export default defineConfig({
   plugins: [reactRefresh()],
   resolve: {
     alias: {
       '@src': path.resolve(__dirname, './src'),
+      lodash: 'lodash-es',
     },
   },
   define: {
@@ -18,7 +21,9 @@ export default defineConfig({
     jsxInject: "import React from 'react';",
   },
   css: {},
+
   build: {
+    minify: true,
     emptyOutDir: true,
     target: 'es2015',
     outDir: './dist',
@@ -26,6 +31,11 @@ export default defineConfig({
       entry: 'src/index.tsx',
       name: 'reactive-mjml',
       formats: ['es'],
+    },
+    rollupOptions: {
+      plugins: [visualizer()],
+      external: ['react', 'react-dom', 'react-dom/server', 'mjml-browser'],
+      output: {},
     },
   },
 });

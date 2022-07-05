@@ -1,13 +1,16 @@
 import { borderParser, shorthandParser } from '@src/utils/helpers/shorthandParser';
-import { identity, omitBy, reduce, isNil, isString, camelCase, get, } from 'lodash';
+import { identity, omitBy, reduce, isNil, isString, camelCase, get } from 'lodash';
 import { Component } from 'react';
-import he from 'he';
+import { decode } from 'he';
 import { IBlock, IComponentAttributes } from '@src/typings';
 import { formatAttributes } from '@src/utils/helpers/formatAttributes';
 import { MjmlContext } from '@src/context/MjmlContext';
-import { toJS } from 'mobx';
 
-export abstract class BodyComponent<T extends Record<string, any>> extends Component<T & { data: IBlock; nonRawSiblings: number; containerWidth: string; }, {}, typeof MjmlContext> {
+export abstract class BodyComponent<T extends Record<string, any>> extends Component<
+  T & { data: IBlock; nonRawSiblings: number; containerWidth: string },
+  {},
+  typeof MjmlContext
+> {
   declare context: React.ContextType<typeof MjmlContext>;
   static defaultAttributes: Record<string, any> = {};
   static allowedAttributes: Record<string, string> = {};
@@ -35,7 +38,9 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
         ...this.props.data.attributes,
       } as Record<string, any>;
 
-      const mjClassValues: string[] = acc['mj-class'] ? acc['mj-class'].split(" ").filter(Boolean) : [];
+      const mjClassValues: string[] = acc['mj-class']
+        ? acc['mj-class'].split(' ').filter(Boolean)
+        : [];
       if (this.props.data.tagName === 'mj-text') {
         // console.log(acc, mjClassValues);
       }
@@ -44,7 +49,6 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
         Object.assign(attributesClasses, get(contextData.classAttributes, value));
       }
     });
-
 
     return formatAttributes(
       {
@@ -55,8 +59,7 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
       },
       (this.constructor as any).allowedAttributes,
     );
-
-  };
+  }
 
   static rawElement?: boolean;
 
@@ -80,7 +83,10 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
     return {};
   }
 
-  getShorthandAttrValue(attribute: string, direction: 'top' | 'bottom' | 'left' | 'right') {
+  getShorthandAttrValue(
+    attribute: string,
+    direction: 'top' | 'bottom' | 'left' | 'right',
+  ) {
     const mjAttributeDirection = this.getAttribute(`${attribute}-${direction}`);
     const mjAttribute = this.getAttribute(attribute);
 
@@ -96,8 +102,7 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
   }
 
   getShorthandBorderValue(direction: 'top' | 'bottom' | 'left' | 'right') {
-    const borderDirection =
-      direction && this.getAttribute(`border-${direction}`);
+    const borderDirection = direction && this.getAttribute(`border-${direction}`);
     const border = this.getAttribute('border');
 
     return borderParser(borderDirection || border || '0');
@@ -116,8 +121,7 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
       this.getShorthandAttrValue('padding', 'left');
 
     const borders =
-      this.getShorthandBorderValue('right') +
-      this.getShorthandBorderValue('left');
+      this.getShorthandBorderValue('right') + this.getShorthandBorderValue('left');
 
     return {
       totalWidth: parsedWidth,
@@ -137,12 +141,10 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
       return reduce(
         omitBy(attributes, isNil),
         (output, v: any, name) => {
-          const fn = name === 'style' ? specialAttributes.style : specialAttributes.default;
-          const value = fn(
-            v,
-          );
-          return `${output} ${name}="${isString(value) ? he.decode(value) : value
-            }"`;
+          const fn =
+            name === 'style' ? specialAttributes.style : specialAttributes.default;
+          const value = fn(v);
+          return `${output} ${name}="${isString(value) ? decode(value) : value}"`;
         },
         '',
       );
@@ -150,10 +152,9 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
       const obj = reduce(
         omitBy(attributes, isNil),
         (output, v: any, name) => {
-          const fn = name === 'style' ? specialAttributes.style : specialAttributes.default;
-          const value = fn(
-            v,
-          );
+          const fn =
+            name === 'style' ? specialAttributes.style : specialAttributes.default;
+          const value = fn(v);
 
           let property: string = name;
           if (name === 'class') {
@@ -170,7 +171,7 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
           }
           return {
             ...output,
-            [property]: isString(value) ? he.decode(value) : value,
+            [property]: isString(value) ? decode(value) : value,
           };
         },
         {},
@@ -195,8 +196,7 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
         stylesObject,
         (output, value, name) => {
           if (!isNil(value)) {
-            return `${output}${name}:${isString(value) ? he.decode(value) : value
-              };`;
+            return `${output}${name}:${isString(value) ? decode(value) : value};`;
           }
           return output;
         },
@@ -208,13 +208,10 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
     for (let i in stylesObject) {
       if (stylesObject[i]) {
         map[camelCase(i)] = isString(stylesObject[i])
-          ? he.decode(stylesObject[i])
+          ? decode(stylesObject[i])
           : stylesObject[i];
       }
     }
     return map;
   }
-
-
-
 }
