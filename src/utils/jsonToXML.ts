@@ -1,5 +1,3 @@
-import { IBlock } from '@src/typings';
-
 interface JsonItem {
   tagName: string;
   attributes: Record<string, string>;

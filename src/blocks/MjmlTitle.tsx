@@ -1,16 +1,19 @@
 import { BodyComponent } from '@src/components/BodyComponent';
+import { MjmlContext } from '@src/context/MjmlContext';
 
 export class MjmlTitle extends BodyComponent<{}> {
   static componentName = 'mj-title';
 
   static endingTag = true;
+  declare context: React.ContextType<typeof MjmlContext>;
+  static contextType = MjmlContext;
 
   componentDidMount() {
-    this.context.setTitle(this.getContent());
+    this.props.context.setTitle(this.getContent());
   }
 
   componentDidUpdate() {
-    this.context.setTitle(this.getContent());
+    this.props.context.setTitle(this.getContent());
   }
 
   render() {

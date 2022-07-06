@@ -119,7 +119,7 @@ export class MjmlGroup extends BodyComponent<{}> {
           parsedWidth,
           unit,
         },
-        this.context.data.breakpoint,
+        this.props.context.breakpoint,
       ),
     };
   }

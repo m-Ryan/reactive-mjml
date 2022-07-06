@@ -1,10 +1,8 @@
-
 import { BlockRenderer } from '@src/components/BlockRenderer';
 import { BodyComponent } from '@src/components/BodyComponent';
 import { getMediaQuery } from '@src/utils/helpers/getMediaQuery';
 import { widthParser } from '@src/utils/widthParser';
 export class MjmlColumn extends BodyComponent<{}> {
-
   static componentName = 'mj-column';
 
   static allowedAttributes = {
@@ -48,16 +46,14 @@ export class MjmlColumn extends BodyComponent<{}> {
     const allPaddings = paddings + borders + innerBorders;
 
     let containerWidth =
-      this.getAttribute('width') ||
-      `${parseFloat(parentWidth) / nonRawSiblings}px`;
+      this.getAttribute('width') || `${parseFloat(parentWidth) / nonRawSiblings}px`;
 
     const { unit, parsedWidth } = widthParser(containerWidth, {
       parseFloatToInt: false,
     });
 
     if (unit === '%') {
-      containerWidth = `${(parseFloat(parentWidth) * parsedWidth) / 100 - allPaddings
-        }px`;
+      containerWidth = `${(parseFloat(parentWidth) * parsedWidth) / 100 - allPaddings}px`;
     } else {
       containerWidth = `${parsedWidth - allPaddings}px`;
     }
@@ -89,14 +85,14 @@ export class MjmlColumn extends BodyComponent<{}> {
       table: {
         ...(this.hasGutter()
           ? {
-            'background-color': this.getAttribute('inner-background-color'),
-            border: this.getAttribute('inner-border'),
-            'border-bottom': this.getAttribute('inner-border-bottom'),
-            'border-left': this.getAttribute('inner-border-left'),
-            'border-radius': this.getAttribute('inner-border-radius'),
-            'border-right': this.getAttribute('inner-border-right'),
-            'border-top': this.getAttribute('inner-border-top'),
-          }
+              'background-color': this.getAttribute('inner-background-color'),
+              border: this.getAttribute('inner-border'),
+              'border-bottom': this.getAttribute('inner-border-bottom'),
+              'border-left': this.getAttribute('inner-border-left'),
+              'border-radius': this.getAttribute('inner-border-radius'),
+              'border-right': this.getAttribute('inner-border-right'),
+              'border-top': this.getAttribute('inner-border-top'),
+            }
           : tableStyle),
       },
       tdOutlook: {
@@ -152,10 +148,12 @@ export class MjmlColumn extends BodyComponent<{}> {
     return `${parsedWidth}px`;
   }
 
-  getParsedWidth(toString?: boolean): string | {
-    unit: string,
-    parsedWidth: number,
-  } {
+  getParsedWidth(toString?: boolean):
+    | string
+    | {
+        unit: string;
+        parsedWidth: number;
+      } {
     const { nonRawSiblings } = this.props;
 
     const width = this.getAttribute('width') || `${100 / nonRawSiblings}%`;
@@ -175,7 +173,6 @@ export class MjmlColumn extends BodyComponent<{}> {
   }
 
   getColumnClassAndMediaQuery() {
-
     let className = '';
 
     const { parsedWidth, unit } = this.getParsedWidth() as {
@@ -195,13 +192,16 @@ export class MjmlColumn extends BodyComponent<{}> {
         break;
     }
 
-
     return {
       className,
-      mediaQuery: getMediaQuery(className, {
-        parsedWidth,
-        unit,
-      }, this.context.data.breakpoint)
+      mediaQuery: getMediaQuery(
+        className,
+        {
+          parsedWidth,
+          unit,
+        },
+        this.props.context.breakpoint,
+      ),
     };
   }
 
@@ -212,7 +212,7 @@ export class MjmlColumn extends BodyComponent<{}> {
       'padding-left',
       'padding-right',
       'padding-top',
-    ].some((attr) => this.getAttribute(attr) != null);
+    ].some(attr => this.getAttribute(attr) != null);
   }
 
   renderGutter() {
@@ -258,8 +258,14 @@ export class MjmlColumn extends BodyComponent<{}> {
         )}
       >
         <tbody>
-          {data.children?.map((item, index) => <BlockRenderer key={index} data={item} containerWidth={this.getParentWidth()} parent={data} />)}
-
+          {data.children?.map((item, index) => (
+            <BlockRenderer
+              key={index}
+              data={item}
+              containerWidth={this.getParentWidth()}
+              parent={data}
+            />
+          ))}
         </tbody>
       </table>
     );

@@ -1,9 +1,7 @@
-
-
 import { BodyComponent } from '@src/components/BodyComponent';
 import { ColumnChildWrapper } from '@src/components/ColumnChildWrapper';
 import { widthParser } from '@src/utils/widthParser';
-import { min, reduce } from 'lodash';
+import { reduce } from 'lodash';
 
 export class MjmlTable extends BodyComponent<{}> {
   static componentName = 'mj-table';
@@ -80,16 +78,17 @@ export class MjmlTable extends BodyComponent<{}> {
     return (
       <ColumnChildWrapper com={this}>
         <table
-          {...this.htmlAttributes({
-            ...tableAttributes,
-            width: this.getWidth(),
-            border: '0',
-            style: 'table',
-          }, false)}
+          {...this.htmlAttributes(
+            {
+              ...tableAttributes,
+              width: this.getWidth(),
+              border: '0',
+              style: 'table',
+            },
+            false,
+          )}
           dangerouslySetInnerHTML={{ __html: this.getContent() }}
-        >
-
-        </table>
+        ></table>
       </ColumnChildWrapper>
     );
   }

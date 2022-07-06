@@ -4,35 +4,33 @@ import { Component } from 'react';
 import { decode } from 'he';
 import { IBlock, IComponentAttributes } from '@src/typings';
 import { formatAttributes } from '@src/utils/helpers/formatAttributes';
-import { MjmlContext } from '@src/context/MjmlContext';
+import { GlobalContext } from '@src/store/GlobalContext';
+import { toJS } from 'mobx';
 
 export abstract class BodyComponent<T extends Record<string, any>> extends Component<
-  T & { data: IBlock; nonRawSiblings: number; containerWidth: string },
-  {},
-  typeof MjmlContext
+  T & {
+    data: IBlock;
+    nonRawSiblings: number;
+    containerWidth: string;
+    context: GlobalContext;
+  },
+  {}
 > {
-  declare context: React.ContextType<typeof MjmlContext>;
   static defaultAttributes: Record<string, any> = {};
   static allowedAttributes: Record<string, string> = {};
 
-  static contextType = MjmlContext;
-
   get attributes(): IComponentAttributes {
-    const { data: contextData } = this.context;
+    const { globalAttributes, blockAttributes, classAttributes } = this.props.context;
 
-    const attributesClasses = {} as Record<string, any>;
-
-    // mj-all
-    const globalAttributes = contextData.globalAttributes;
-
-    // mj-[text]
-    const blockAttributes = contextData.blockAttributes[this.props.data.tagName];
-    if (blockAttributes) {
-      Object.assign(attributesClasses, blockAttributes);
-    }
+    const attributesClasses = {
+      ...blockAttributes,
+    } as Record<string, any>;
+    // if (this.props.data.tagName === 'mj-text') {
+    //   console.log('blockAttributes', JSON.parse(JSON.stringify(blockAttributes)));
+    // }
 
     // mj-class
-    Object.keys(contextData.classAttributes).forEach(value => {
+    Object.keys(classAttributes).forEach(value => {
       const acc = {
         ...(this.constructor as any).defaultAttributes,
         ...this.props.data.attributes,
@@ -46,7 +44,7 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
       }
 
       if (mjClassValues.includes(value)) {
-        Object.assign(attributesClasses, get(contextData.classAttributes, value));
+        Object.assign(attributesClasses, get(classAttributes, value));
       }
     });
 
@@ -68,7 +66,7 @@ export abstract class BodyComponent<T extends Record<string, any>> extends Compo
   }
 
   getBreakpoint() {
-    return this.context.data.breakpoint;
+    return this.props.context.data.breakpoint;
   }
 
   getAttribute(name: string): string {

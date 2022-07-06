@@ -1,5 +1,3 @@
-
-
 import { BodyComponent } from '@src/components/BodyComponent';
 
 export class MjmlBreakPoint extends BodyComponent<{}> {
@@ -10,10 +8,6 @@ export class MjmlBreakPoint extends BodyComponent<{}> {
   static allowedAttributes = {
     width: 'unit(px)',
   };
-
-  componentDidMount() {
-    this.context.setBreakPoint(this.getAttribute('width'));
-  }
 
   render() {
     return <></>;

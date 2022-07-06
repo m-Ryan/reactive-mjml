@@ -8,14 +8,6 @@ export class MjmlFont extends BodyComponent<{}> {
     href: 'string',
   };
 
-  componentDidMount() {
-    this.context.addFont(this.getAttribute('name'), this.getAttribute('href'));
-  }
-
-  componentDidUpdate() {
-    this.context.addFont(this.getAttribute('name'), this.getAttribute('href'));
-  }
-
   render() {
     const href = this.getAttribute('href');
     return (
