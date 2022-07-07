@@ -1,4 +1,4 @@
-import mjml from 'mjml-browser';
+import mjml from 'mjml';
 const mjmlText = `
 
 

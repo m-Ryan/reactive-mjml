@@ -5,7 +5,6 @@ import { decode } from 'he';
 import { IBlock, IComponentAttributes } from '@src/typings';
 import { formatAttributes } from '@src/utils/helpers/formatAttributes';
 import { GlobalContext } from '@src/store/GlobalContext';
-import { toJS } from 'mobx';
 
 export abstract class BodyComponent<T extends Record<string, any>> extends Component<
   T & {

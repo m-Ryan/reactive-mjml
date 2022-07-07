@@ -10,6 +10,7 @@ export default defineConfig({
     alias: {
       '@src': path.resolve(__dirname, './src'),
       lodash: 'lodash-es',
+      mjml: 'mjml-browser',
     },
   },
   define: {
@@ -26,11 +27,12 @@ export default defineConfig({
     minify: true,
     emptyOutDir: true,
     target: 'es2015',
-    outDir: './dist',
+    outDir: './lib',
     lib: {
       entry: 'src/index.tsx',
       name: 'reactive-mjml',
       formats: ['es'],
+      fileName: mod => `index.js`,
     },
     rollupOptions: {
       plugins: [visualizer()],

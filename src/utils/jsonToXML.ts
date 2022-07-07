@@ -5,7 +5,12 @@ interface JsonItem {
   content?: string;
 }
 
-const jsonToXML = ({ tagName, attributes, children, content }: JsonItem): string => {
+export const jsonToXML = ({
+  tagName,
+  attributes,
+  children,
+  content,
+}: JsonItem): string => {
   const subNode =
     children && children.length > 0 ? children.map(jsonToXML).join('\n') : content || '';
 
@@ -17,5 +22,3 @@ const jsonToXML = ({ tagName, attributes, children, content }: JsonItem): string
     stringAttrs === '' ? '>' : ` ${stringAttrs}>`
   }${subNode}</${tagName}>`;
 };
-
-export default jsonToXML;
